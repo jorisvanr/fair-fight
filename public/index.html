@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fair Fight</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div id="menu">
+            <h2>Select a gamemode to start the game:</h2>
+            <span>Offline</span><br/>
+            <span>Mobile Connect</span>
+        </div>
+
+        <div id="bm_animation_offline">
+            <div id="click_r"></div>
+            <div id="click_l"></div>
+        </div>
+
+        <div id="bm_animation_online_menu">
+            Waiting for players to join... (<span id="clients">0</span> of 2 connected)<br/>
+            To join this game scan the code<br/><br/>
+            <span id="qr_code"></span>
+        </div>
+
+        <div id="bm_animation_online">
+        </div>
+
+        <div id="mobile_connect">
+            <h3>Connected</h3><br/>
+            <span id="trigger_remote_click">HIT PLAYER</span>
+        </div>
+
+        <div id="error">Can't connect to the FightIO Server!</div>
+        <script src="js/libraries/bodymovin.js" type="text/javascript"></script>
+        <script src="js/libraries/TweenMax.js" type="text/javascript"></script>
+        <script src="js/libraries/qrcode.js" type="text/javascript"></script>
+        <script src="js/libraries/socket.io.js" type="text/javascript"></script>
+        <script src="js/src/offline.js" type="text/javascript"></script>
+        <script src="js/src/online.js" type="text/javascript"></script>
+        <script src="js/src/mobile_connect.js" type="text/javascript"></script>
+        <script src="js/src/main.js" type="text/javascript"></script>
+    </body>
+</html>

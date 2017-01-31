@@ -1,0 +1,14 @@
+# Dependency managers
+node_modules/
+npm-debug.log
+
+# PhpStorm specific
+.idea
+
+# General files
+*~
+*.DS_STORE
+
+# Vagrant specific
+.vagrant/
+.vagrantuser

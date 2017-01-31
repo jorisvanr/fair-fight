@@ -1,0 +1,121 @@
+body, html {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: Verdana, Arial;
+    overflow: hidden;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+#bm_animation_offline {
+    opacity: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#click_l {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#click_r {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#menu {
+    opacity: 0;
+    display: none;
+}
+
+#menu span {
+    cursor: pointer;
+}
+
+#trigger_remote_click {
+    cursor: pointer;
+}
+
+#bm_animation_online_menu {
+    opacity: 0;
+    display: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+#bm_animation_online {
+    opacity: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#mobile_connect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    opacity: 0;
+    display: none;
+}
+
+#error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    opacity: 0;
+    display: none;
+}
+
+#trigger_remote_click {
+    font-size: 50px;
+    font-weight: bold;
+    opacity: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.gray {
+    color: gray;
+}

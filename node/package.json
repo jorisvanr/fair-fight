@@ -1,0 +1,15 @@
+{
+  "name": "fairfight-joris",
+  "version": "0.0.0",
+  "description": "NPM packages for fairfight-joris",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Glenn de Haan",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "0.9.6",
+    "connect": "1.9.2"
+  }
+}
