@@ -1,8 +1,15 @@
 var anim, isHitting = true, socket, id, clients = 0, gameRunning = false;
 
 function onlineInit() {
+    /**
+     * Initialize the socket connection to the server
+     * @type {io.Socket}
+     */
     socket = io.connect('http://'+settings.url+':'+settings.port+'/');
 
+    /**
+     * Event for a socket error/malfunction
+     */
     socket.on('error', function  () {
         console.error("Connection error!");
 
@@ -12,14 +19,23 @@ function onlineInit() {
         });
     });
 
+    /**
+     * Event when another socket connects to the server
+     */
     socket.on('entrance', function  (data) {
         console.log(data.message);
     });
 
+    /**
+     * Event when another socket disconnects from the server
+     */
     socket.on('exit', function  (data) {
         console.log(data.message);
     });
 
+    /**
+     * Event when a client connects/disconnects from the server
+     */
     socket.on('client_update', function  (data) {
         console.log(data);
 
@@ -69,6 +85,9 @@ function onlineInit() {
         }
     });
 
+    /**
+     * Event when a client hits the "HIT" button
+     */
     socket.on('client_movement', function (data) {
         if(data.id == id){
             if(data.color == "red"){
@@ -83,6 +102,9 @@ function onlineInit() {
         }
     });
 
+    /**
+     * Function triggered when the server returns a new QR/Session code
+     */
     socket.on('qr', function  (data) {
         console.log(data);
         id = data.id;
@@ -101,6 +123,9 @@ function onlineInit() {
         });
     });
 
+    /**
+     * Asks the server for a QR/Session code
+     */
     socket.emit('qr');
 }
 

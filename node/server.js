@@ -8,6 +8,11 @@ var servers = [];
 var clients = [];
 var server_id_playID = [];
 
+/**
+ * Creates a random string used for a QR/Session code
+ *
+ * @return {string}
+ */
 function makeServerID() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -18,6 +23,11 @@ function makeServerID() {
     return text;
 }
 
+/**
+ * Main socket function used when a new socket connects
+ *
+ * @param socket
+ */
 fightIO.sockets.on('connection', function (socket) {
     /**
      * Functions for client/server disconnects

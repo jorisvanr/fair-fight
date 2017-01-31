@@ -1,8 +1,15 @@
 var socket, serverId, color, canClickTimeout, canClick = true;
 
 function mobileInit() {
+    /**
+     * Initialize the socket connection to the server
+     * @type {io.Socket}
+     */
     socket = io.connect('http://'+settings.url+':'+settings.port+'/');
 
+    /**
+     * Event for a socket error/malfunction
+     */
     socket.on('error', function  () {
         console.error("Connection error!");
 
@@ -12,14 +19,23 @@ function mobileInit() {
         });
     });
 
+    /**
+     * Event when another socket connects to the server
+     */
     socket.on('entrance', function  (data) {
         console.log(data.message);
     });
 
+    /**
+     * Event when another socket disconnects from the server
+     */
     socket.on('exit', function  (data) {
         console.log(data.message);
     });
 
+    /**
+     * Event when the server closes the connection
+     */
     socket.on('server_update', function  (data) {
         console.log(data);
 
@@ -38,6 +54,9 @@ function mobileInit() {
         }
     });
 
+    /**
+     * Event triggered when the server has verified the playID returns: OK, no_session, full_session
+     */
     socket.on('check_session', function (data) {
         console.log(data);
 
@@ -80,8 +99,15 @@ function mobileInit() {
     });
 
     serverId = getParameterByName("id");
+
+    /**
+     * Request a session check for the playID the user entered
+     */
     socket.emit('check_session', {id: serverId});
 
+    /**
+     * Event listener when the user clicks the "HIT" button
+     */
     document.querySelector("#trigger_remote_click").addEventListener("click", function () {
         if(canClick) {
             socket.emit('client_movement', {id: serverId, color: color});
