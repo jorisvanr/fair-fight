@@ -1,6 +1,7 @@
-var anim, isHitting;
-
 function offlineInit() {
+    // Init global vars
+    var anim, isHitting = false;
+
     var container = document.getElementById('bm_animation_offline');
     var animData = {
         container: container,
@@ -13,37 +14,49 @@ function offlineInit() {
     };
 
     anim = bodymovin.loadAnimation(animData);
-    offlinestartAnimation();
+    startAnimation();
 
-    document.querySelector("#click_r").addEventListener("click", offlinehitRight);
-    document.querySelector("#click_l").addEventListener("click", offlinehitLeft);
-}
+    document.querySelector("#click_r").addEventListener("click", hitRight);
+    document.querySelector("#click_l").addEventListener("click", hitLeft);
 
-function offlinehitComplete() {
-    isHitting = false;
-    anim.removeEventListener('loopComplete', offlinehitComplete);
-}
-
-function offlinehitRight() {
-    if (isHitting) {
-        return;
+    /**
+     * Function triggered when the hit animation is done
+     */
+    function hitComplete() {
+        isHitting = false;
+        anim.removeEventListener('loopComplete', hitComplete);
     }
 
-    isHitting = true;
-    anim.playSegments([[75, 95], [65, 75]], true);
-    anim.addEventListener('loopComplete', offlinehitComplete);
-}
+    /**
+     * Function triggered when someone hits the left player
+     */
+    function hitRight() {
+        if (isHitting) {
+            return;
+        }
 
-function offlinehitLeft() {
-    if (isHitting) {
-        return;
+        isHitting = true;
+        anim.playSegments([[75, 95], [65, 75]], true);
+        anim.addEventListener('loopComplete', hitComplete);
     }
 
-    isHitting = true;
-    anim.playSegments([[95, 115], [65, 75]], true);
-    anim.addEventListener('loopComplete', offlinehitComplete);
-}
+    /**
+     * Function triggered when someone hits the right player
+     */
+    function hitLeft() {
+        if (isHitting) {
+            return;
+        }
 
-function offlinestartAnimation() {
-    anim.playSegments([[0, 65], [65, 75]], true);
+        isHitting = true;
+        anim.playSegments([[95, 115], [65, 75]], true);
+        anim.addEventListener('loopComplete', hitComplete);
+    }
+
+    /**
+     * Function used to play the intro animation
+     */
+    function startAnimation() {
+        anim.playSegments([[0, 65], [65, 75]], true);
+    }
 }

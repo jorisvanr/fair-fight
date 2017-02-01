@@ -5,7 +5,7 @@ function mobileInit() {
      * Initialize the socket connection to the server
      * @type {io.Socket}
      */
-    socket = io.connect('http://'+settings.url+':'+settings.port+'/');
+    socket = io.connect('http://'+settings.url+':'+settings.socketPort+'/');
 
     /**
      * Event for a socket error/malfunction

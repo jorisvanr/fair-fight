@@ -1,10 +1,11 @@
 /**
  * Define settings for socket server
- * @type {{url: string, port: number}}
+ * @type {{url: string, socketPort: string, httpPort: string}}
  */
 var settings = {
-    url: "prototype.dev",
-    port: 3000
+    url: "192.168.2.244", // Normal: "fair-fight.dev"
+    socketPort: "3000", // Normal: "3000"
+    httpPort: "4567" // Normal: ""
 };
 
 /**
