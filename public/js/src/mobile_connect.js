@@ -1,6 +1,7 @@
-var socket, serverId, color, canClickTimeout, canClick = true;
-
 function mobileInit() {
+    // Init global vars
+    var socket, anim, serverId, color, canClickTimeout, canClick = true;
+
     /**
      * Initialize the socket connection to the server
      * @type {io.Socket}
@@ -46,7 +47,7 @@ function mobileInit() {
 
                 document.querySelector("#mobile_connect h3").innerText = "The server closed the connection!";
 
-                TweenMax.to(document.querySelector("#trigger_remote_click"), 0.5, {
+                TweenMax.to(document.querySelector("#mobile_connect svg"), 0.5, {
                     opacity: 0,
                     display: 'none'
                 });
@@ -63,16 +64,20 @@ function mobileInit() {
         if(data.session) {
             color = data.color;
 
-            document.querySelector("#trigger_remote_click").dataset.id = data.id;
-            document.querySelector("#trigger_remote_click").dataset.color = data.color;
-            document.querySelector("#trigger_remote_click").classList.add(data.color);
+            document.querySelector("#mobile_connect").dataset.id = data.id;
+            document.querySelector("#mobile_connect").dataset.color = data.color;
+            document.querySelector("#button").classList.add(data.color);
+
+            document.querySelector("#mobile_connect h3").innerText = "";
 
             TweenMax.to(document.querySelector("#mobile_connect"), 2, {
                 opacity: 1,
                 display: 'block'
             });
 
-            TweenMax.to(document.querySelector("#trigger_remote_click"), 2, {
+            startAnimation();
+
+            TweenMax.to(document.querySelector("#mobile_connect svg"), 2, {
                 opacity: 1,
                 display: 'block'
             });
@@ -106,21 +111,50 @@ function mobileInit() {
     socket.emit('check_session', {id: serverId});
 
     /**
-     * Event listener when the user clicks the "HIT" button
+     * Init bodymovin
+     * @type {Element}
      */
-    document.querySelector("#trigger_remote_click").addEventListener("click", function () {
-        if(canClick) {
-            socket.emit('client_movement', {id: serverId, color: color});
+    var container = document.getElementById('mobile_connect');
+    var animData = {
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        prerender: false,
+        autoplay: false,
+        autoloadSegments: false,
+        path: 'data/mobile_button.json'
+    };
+    anim = bodymovin.loadAnimation(animData);
 
-            document.querySelector("#trigger_remote_click").classList.remove(color);
-            document.querySelector("#trigger_remote_click").classList.add("grey");
-            canClick = false;
+    /**
+     * Bodymovin button stuff
+     */
+    function startAnimation(){
+        anim.playSegments([[0,25],[25,250]],true);
 
-            canClickTimeout = setTimeout(function () {
-                document.querySelector("#trigger_remote_click").classList.remove("grey");
-                document.querySelector("#trigger_remote_click").classList.add(color);
-                canClick = true;
-            }, 1000);
-        }
-    });
+        /**
+         * Event listener when the user clicks the "HIT" button
+         */
+        document.querySelector("#button").addEventListener("click", function () {
+            if(canClick) {
+                container.classList.add("flash");
+
+                socket.emit('client_movement', {id: serverId, color: color});
+
+                canClick = false;
+
+                canClickTimeout = setTimeout(function () {
+                    container.classList.remove("flash");
+                    canClick = true;
+                }, 1000);
+            }
+        });
+    }
+
+    /**
+     * Function used to destroy the animation when a client disconnects
+     */
+    function killBodymovin() {
+        anim.destroy();
+    }
 }

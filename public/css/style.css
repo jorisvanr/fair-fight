@@ -77,10 +77,11 @@ body, html {
 }
 
 #mobile_connect {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
     text-align: center;
 
@@ -108,14 +109,22 @@ body, html {
     cursor: pointer;
 }
 
-.blue {
-    color: blue;
+#button.blue g:nth-child(1) path {
+    fill: darkblue;
+}
+#button.blue g:nth-child(2) path {
+    fill: blue;
+}
+#button.blue g:nth-child(3) path {
+    fill: white;
 }
 
-.red {
-    color: red;
+#button.red g:nth-child(1) path {
+    fill: darkred;
 }
-
-.gray {
-    color: gray;
+#button.red g:nth-child(2) path {
+    fill: red;
+}
+#button.red g:nth-child(3) path {
+    fill: white;
 }
